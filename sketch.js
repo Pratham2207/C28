@@ -16,7 +16,7 @@ function setup(){
     engine = Engine.create();
     world = engine.world;
 
-smallLog = new Log(100,200,50,PI/2);
+
 
     ground = new Ground(600,height,1200,20);
     platform = new Ground(150, 305, 300, 170);
@@ -38,7 +38,7 @@ smallLog = new Log(100,200,50,PI/2);
 
     bird = new Bird(100,100);
 
-    chain = new Chain(bird.body,smallLog.body)
+    chain = new Chain(bird.body,{x:200,y:100})
 
 }
 
@@ -62,10 +62,18 @@ function draw(){
     box5.display();
     log4.display();
     log5.display();
-    smallLog.display();
+    
 
 chain.display();
 
     bird.display();
     platform.display();
+}
+
+function mouseDragged(){
+    Matter.Body.setPosition(bird.body,{x:mouseX,y:mouseY});
+}
+
+function mouseReleased(){
+    chain.fly()
 }
